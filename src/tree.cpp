@@ -6,6 +6,7 @@
 //////////////////////////////////////////////////////////////////////////////
 
 #include <assert.h>
+#include <math.h>
 
 #include "dump_tree.h"
 
@@ -75,4 +76,35 @@ TreeErrors CheckTree(const struct TreeNode *node)
     if (righterr != TREE_OK) return righterr;
 
     return TREE_OK;
+}
+
+/// Calculates a node with operator.
+/// @warning Only node containing operator (NOT A NUMBER) may be passed
+
+static inline TreeNodeNumType CalculateOpNode(const struct TreeNode *node);
+
+TreeNodeNumType EvalTree(const struct TreeNode *node)
+{
+    TREE_ASSERT(node);
+
+    switch (node->type) {
+        case TYPE_NUMBER:   return node->data.num;
+        case TYPE_OPERATOR: return CalculateOpNode(node);
+        default:            assert(0 && "Unhandled enum value");
+    }
+}
+
+static inline TreeNodeNumType CalculateOpNode(const struct TreeNode *node)
+{
+    TREE_ASSERT(node);
+    assert(node);
+
+    switch (node->data.op) {
+        case OP_ADD: return EvalTree(node->left) + EvalTree(node->right);
+        case OP_SUB: return EvalTree(node->left) - EvalTree(node->right);
+        case OP_MUL: return EvalTree(node->left) * EvalTree(node->right);
+        case OP_DIV: return EvalTree(node->left) / EvalTree(node->right);
+        case OP_POW: return pow(EvalTree(node->left), EvalTree(node->right));
+        default:     assert(0 && "Unhandled enum value");
+    }
 }

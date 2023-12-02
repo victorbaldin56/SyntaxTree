@@ -84,4 +84,13 @@ enum TreeErrors {
 
 TreeErrors CheckTree(const struct TreeNode *node);
 
+//////////////////////////////////////////////////////////////////////////////
+/// @brief Evaluates an arithmetic expression represented as tree.
+///
+/// @param node Node to evaluate.
+/// @return A node value.
+//////////////////////////////////////////////////////////////////////////////
+
+TreeNodeNumType EvalTree(const struct TreeNode *node);
+
 #endif // TREE_H_

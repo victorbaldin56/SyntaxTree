@@ -17,6 +17,7 @@ int main()
     struct TreeNode *mul  = CreateOpNode(OP_MUL, 1, 2);
     struct TreeNode *node = TreeNodeCtor(TYPE_OPERATOR, OP_DIV, plus, mul);
 
+    printf("Result: " TREE_NODE_NUM_FORMAT "\n", EvalTree(node));
     TREE_DUMP(node);
 
     TreeNodeDtor(node);
