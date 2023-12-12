@@ -145,7 +145,7 @@ static inline void PrintTreeNode(FILE *output, const struct TreeNode *node)
             break;
         }
         case TYPE_OPERATOR: {
-            fprintf(output, "orange, label = \"%c", node->data.op);
+            fprintf(output, "orange, label = \"%c", OP_SYMBOLS[node->data.op]);
             break;
         }
         case TYPE_VARIABLE: {
