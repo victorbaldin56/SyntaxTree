@@ -8,6 +8,7 @@
 #include "expr_parser.h"
 
 #include <assert.h>
+#include <ctype.h>
 #include <string.h>
 
 //////////////////////////////////////////////////////////////////////////////
@@ -19,6 +20,7 @@ static struct TreeNode *GetMulN(char **strp);
 static struct TreeNode *GetPowN(char **strp);
 static struct TreeNode *GetBrac(char **strp);
 static inline struct TreeNode *GetNumN(char **strp);
+static inline struct TreeNode *GetVarN(char **strp);
 
 /// @}
 //////////////////////////////////////////////////////////////////////////////
@@ -130,6 +132,19 @@ static TreeNode *GetBrac(char **strp)
     }
 
     // TODO: syntax errors handling
+    return GetVarN(strp);
+}
+
+static inline struct TreeNode *GetVarN(char **strp)
+{
+    assert(strp && *strp);
+
+    if (isalpha(**strp)) {
+        char varname = **strp;
+        ++*strp;
+        return TreeNodeCtor(TYPE_VARIABLE, varname, NULL, NULL);
+    }
+
     return GetNumN(strp);
 }
 

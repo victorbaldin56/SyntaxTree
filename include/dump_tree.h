@@ -8,6 +8,9 @@
 #ifndef DUMP_TREE_H_
 #define DUMP_TREE_H_
 
+#include <assert.h>
+#include <stdio.h>
+
 #include "tree.h"
 
 /// @brief A structure for storing current place of call and a variable name.

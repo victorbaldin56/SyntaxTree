@@ -12,6 +12,8 @@
 #include <stdio.h>
 #include <time.h>
 
+//============================================================================
+
 //////////////////////////////////////////////////////////////////////////////
 /// @defgroup DumpInfo Methods for printing debug info.
 /// @{
@@ -53,6 +55,7 @@ void GraphTreeDump(const struct TreeNode *node, TreeErrors state,
     CALL_INFO_ASSERT(info);
 
     char default_path[PATH_MAX] = {};
+
     if (!src_path) {
         system("mkdir -p logs");
         NameLogFile(default_path);
@@ -142,8 +145,11 @@ static inline void PrintTreeNode(FILE *output, const struct TreeNode *node)
             break;
         }
         case TYPE_OPERATOR: {
-            fprintf(output, "orange, label = \"%c",
-                            TREE_OPERATORS[node->data.op]);
+            fprintf(output, "orange, label = \"%c", node->data.op);
+            break;
+        }
+        case TYPE_VARIABLE: {
+            fprintf(output, "green, label = \"%c", node->data.varname);
             break;
         }
         default: {

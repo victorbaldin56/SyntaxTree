@@ -13,14 +13,12 @@
 /// A enum for math operators.
 
 enum TreeOperators {
-    OP_ADD,
-    OP_SUB,
-    OP_MUL,
-    OP_DIV,
-    OP_POW,
+    OP_ADD = '+',
+    OP_SUB = '-',
+    OP_MUL = '*',
+    OP_DIV = '/',
+    OP_POW = '^',
 };
-
-const char TREE_OPERATORS[] = "+-*/^"; ///< a kind of name table
 
 /// Type of numeric values containing in TreeNode.
 
@@ -32,11 +30,13 @@ typedef double TreeNodeNumType;
 union TreeNodeData {
     TreeNodeNumType num;    ///<
     TreeOperators op;       ///< operator in case of operator type
+    char varname;           ///<
 };
 
 enum TreeNodeType {
     TYPE_NUMBER,
     TYPE_OPERATOR,
+    TYPE_VARIABLE,
 };
 
 //////////////////////////////////////////////////////////////////////////////

@@ -45,6 +45,10 @@ static inline void SetNodeData(TreeNodeType type, TreeNodeNumType value,
             data->op = (TreeOperators)value;
             break;
         }
+        case TYPE_VARIABLE: {
+            data->varname = (char)value;
+            break;
+        }
         default: {
             assert(0 && "Unhandled enum value");
         }
@@ -90,6 +94,7 @@ TreeNodeNumType EvalTree(const struct TreeNode *node)
     switch (node->type) {
         case TYPE_NUMBER:   return node->data.num;
         case TYPE_OPERATOR: return CalculateOpNode(node);
+        case TYPE_VARIABLE: return NAN;
         default:            assert(0 && "Unhandled enum value");
     }
 }
