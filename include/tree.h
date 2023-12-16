@@ -10,7 +10,7 @@
 
 #include <stdlib.h>
 
-/// A enum for math operators.
+/// An enum for math operators.
 
 enum TreeOperators {
     OP_ADD,
@@ -18,10 +18,11 @@ enum TreeOperators {
     OP_MUL,
     OP_DIV,
     OP_POW,
+    OP_LN,
 };
 
-const char OP_SYMBOLS[] = "+-*/^";
-const int OP_PRIORITIES[] = {3, 3, 2, 2, 1};
+const char *const OP_SYMBOLS[] = {"+", "-", "*", "/", "^", "ln"};
+const int OP_PRIORITIES[]      = {  3,   3,   2,   2,   1,   0};
 
 /// Type of numeric values containing in TreeNode.
 
