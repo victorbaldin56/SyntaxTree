@@ -89,38 +89,44 @@ TreeErrors CheckTree(const struct TreeNode *node)
 /// Calculates a node with operator.
 /// @warning Only node containing operator (NOT A NUMBER) may be passed
 
-static inline TreeNodeNumType CalculateOpNode(const struct TreeNode *node);
+static inline TreeNodeNumType CalculateOpNode(const struct TreeNode *node,
+                                              TreeNodeNumType var);
 
-TreeNodeNumType EvalTree(const struct TreeNode *node)
+TreeNodeNumType EvalTree(const struct TreeNode *node, TreeNodeNumType var)
 {
     TREE_ASSERT(node);
 
     switch (node->type) {
-        case TYPE_NUMBER:   return node->data.num;
-        case TYPE_OPERATOR: return CalculateOpNode(node);
-        case TYPE_VARIABLE: return NAN;
-        default:            assert(0 && "Unhandled enum value");
+        case TYPE_NUMBER:
+            return node->data.num;
+        case TYPE_OPERATOR:
+            return CalculateOpNode(node, var);
+        case TYPE_VARIABLE:
+            return var;
+        default:
+            assert(0 && "Unhandled enum value");
     }
 }
 
-static inline TreeNodeNumType CalculateOpNode(const struct TreeNode *node)
+static inline TreeNodeNumType CalculateOpNode(const struct TreeNode *node,
+                                              TreeNodeNumType var)
 {
     TREE_ASSERT(node);
     assert(node);
 
     switch (node->data.op) {
         case OP_ADD:
-            return EvalTree(node->left) + EvalTree(node->right);
+            return EvalTree(node->left, var) + EvalTree(node->right, var);
         case OP_SUB:
-            return EvalTree(node->left) - EvalTree(node->right);
+            return EvalTree(node->left, var) - EvalTree(node->right, var);
         case OP_MUL:
-            return EvalTree(node->left) * EvalTree(node->right);
+            return EvalTree(node->left, var) * EvalTree(node->right, var);
         case OP_DIV:
-            return EvalTree(node->left) / EvalTree(node->right);
+            return EvalTree(node->left, var) / EvalTree(node->right, var);
         case OP_POW:
-            return pow(EvalTree(node->left), EvalTree(node->right));
+            return pow(EvalTree(node->left, var), EvalTree(node->right, var));
         case OP_LN:
-            return log(EvalTree(node->left));
+            return log(EvalTree(node->left, var));
         default:
             assert(0 && "Unhandled enum value");
     }

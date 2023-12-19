@@ -27,7 +27,7 @@ const int OP_PRIORITIES[]      = {  3,   3,   2,   2,   1,   0};
 /// Type of numeric values containing in TreeNode.
 
 typedef double TreeNodeNumType;
-#define TREE_NODE_NUM_FORMAT "%lf"
+#define TREE_NODE_NUM_FORMAT "%g"
 
 /// @brief Contains a double or operator data depending on node type.
 
@@ -95,6 +95,6 @@ TreeErrors CheckTree(const struct TreeNode *node);
 /// @return A node value.
 //////////////////////////////////////////////////////////////////////////////
 
-TreeNodeNumType EvalTree(const struct TreeNode *node);
+TreeNodeNumType EvalTree(const struct TreeNode *node, TreeNodeNumType var);
 
 #endif // TREE_H_
