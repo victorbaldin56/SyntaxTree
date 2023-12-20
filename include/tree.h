@@ -19,10 +19,11 @@ enum TreeOperators {
     OP_DIV,
     OP_POW,
     OP_LN,
+    OP_EQU,
 };
 
-const char *const OP_SYMBOLS[] = {"+", "-", "*", "/", "^", "ln"};
-const int OP_PRIORITIES[]      = {  3,   3,   2,   2,   1,   0};
+const char *const OP_SYMBOLS[] = {"+", "-", "*", "/", "^", "ln", "="};
+const int OP_PRIORITIES[]      = {  3,   3,   2,   2,   1,   0,    4};
 
 /// Type of numeric values containing in TreeNode.
 

@@ -87,7 +87,7 @@ TreeErrors CheckTree(const struct TreeNode *node)
 }
 
 /// Calculates a node with operator.
-/// @warning Only node containing operator (NOT A NUMBER) may be passed
+/// @warning Only node containing operator (NOT A NUMBER) may be passed.
 
 static inline TreeNodeNumType CalculateOpNode(const struct TreeNode *node,
                                               TreeNodeNumType var);
@@ -127,6 +127,8 @@ static inline TreeNodeNumType CalculateOpNode(const struct TreeNode *node,
             return pow(EvalTree(node->left, var), EvalTree(node->right, var));
         case OP_LN:
             return log(EvalTree(node->left, var));
+        case OP_EQU:
+            return EvalTree(node->left, var);
         default:
             assert(0 && "Unhandled enum value");
     }

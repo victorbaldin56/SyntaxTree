@@ -29,7 +29,7 @@ struct TreeNode *ParseExpression(char str[])
 {
     assert(str);
 
-    return GetAddN(&str);
+    return TreeNodeCtor(TYPE_OPERATOR, OP_EQU, GetAddN(&str), NULL);
 }
 
 ///
